@@ -6,8 +6,6 @@ class Agent(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=255)
-    birth_date = models.DateField(null=True)
-    # property = models.ForeignKey(Property, on_delete=models.PROTECT)
 
 
 # Create your models here.
@@ -32,5 +30,6 @@ class Property(models.Model):
 
 class Location(models.Model):
     location_name = models.CharField(max_length=255)
+    property = models.OneToOneField(Property, on_delete=models.CASCADE, primary_key=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
