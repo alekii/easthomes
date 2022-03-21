@@ -1,8 +1,11 @@
 from rest_framework import serializers
-from .models import Location
+from .models import Location, Property
 
 
-class LocationSerializer(serializers.Serializer):
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = ['location_name,longitude,latitude']
 
     def update(self, instance, validated_data):
         pass
@@ -10,20 +13,16 @@ class LocationSerializer(serializers.Serializer):
     def create(self, validated_data):
         pass
 
-    location_name = serializers.CharField()
-    longitude = serializers.FloatField()
-    latitude = serializers.FloatField()
 
+class PropertySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Property
+        fields = ['id', 'name', 'price', 'description']
 
-class PropertySerializer(serializers.Serializer):
-    def update(self, instance, validated_data):
-        pass
-
-    def create(self, validated_data):
-        pass
-
-    id = serializers.IntegerField()
-    name = serializers.CharField(max_length=255)
-    price = serializers.DecimalField(max_digits=8, decimal_places=0)
-    description = serializers.CharField(max_length=255)
     location = LocationSerializer()
+
+    def update(self, instance, validated_data):
+        pass
+
+    def create(self, validated_data):
+        pass

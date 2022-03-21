@@ -1,20 +1,24 @@
 from django.shortcuts import get_object_or_404
+from rest_framework import status
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from .models import Property as Prop
 from .serializers import PropertySerializer
 
 
-@api_view()
-def properties_list(request):
+class PropertyList(ListCreateAPIView):
     queryset = Prop.objects.select_related('location').all()
-    serializer = PropertySerializer(queryset, many=True)
-    return Response(serializer.data)
+    serializer_class = PropertySerializer
+
+    def get_serializer_context(self):
+        return {'request': self.request}
 
 
-@api_view()
-def property_detail(request, property_id):
-    property_ = get_object_or_404(Prop, pk=property_id)
-    serializer = PropertySerializer(property_)
-    print(serializer.data)
-    return Response(serializer.data)
+class PropertyDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Prop.objects.all()
+    serializer_class = PropertySerializer
+
+    def delete(self, request, property_id):
+        property_ = get_object_or_404(Prop, pk=property_id)
+        property_.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
