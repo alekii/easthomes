@@ -22,10 +22,9 @@ class Property(models.Model):
 
     name = models.CharField(max_length=255)
     description = models.TextField()
-    price = models.DecimalField(max_digits=8, decimal_places=2)
-    last_update = models.DateTimeField(auto_now_add=True)
+    price = models.IntegerField()
     agent = models.ForeignKey(Agent, on_delete=models.PROTECT)
-    property_type = models.CharField(max_length=1, choices=PROPERTY_TYPES)
+    property_type = models.CharField(max_length=1, choices=PROPERTY_TYPES, default=TYPE_BUNGALOW)
 
 
 class Location(models.Model):
@@ -33,3 +32,6 @@ class Location(models.Model):
     property = models.OneToOneField(Property, on_delete=models.CASCADE, primary_key=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
+
+    def __str__(self) -> str:
+        return self.location_name
