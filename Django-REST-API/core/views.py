@@ -1,9 +1,10 @@
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter
 from .models import Property as Prop
 from .models import Agent
 from .serializers import PropertySerializer, AgentSerializer
@@ -49,3 +50,13 @@ class AgentDetail(RetrieveUpdateDestroyAPIView):
             return Response({"Agent cannot be deleted as is associated with property"})
         agent.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class SearchResults(ListAPIView):
+    queryset = Prop.objects.select_related('location').all()
+    serializer_class = PropertySerializer
+    filter_backends = [SearchFilter,]
+    search_fields = ['name']
+
+    def get_serializer_context(self):
+        return {'request': self.request}

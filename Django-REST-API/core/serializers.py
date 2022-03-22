@@ -19,8 +19,10 @@ class PropertySerializer(serializers.ModelSerializer):
 class AgentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Agent
-        fields = ['id','first_name', 'last_name', 'email', 'phone', 'properties_count']
+        fields = ['id', 'first_name', 'last_name', 'email', 'phone', 'properties_count']
 
     properties_count = serializers.IntegerField()
+
+
 
 
