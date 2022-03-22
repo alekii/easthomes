@@ -23,7 +23,7 @@ class Property(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     price = models.IntegerField()
-    agent = models.ForeignKey(Agent, on_delete=models.PROTECT)
+    agent = models.ForeignKey(Agent, on_delete=models.PROTECT, related_name="properties")
     property_type = models.CharField(max_length=1, choices=PROPERTY_TYPES, default=TYPE_BUNGALOW)
 
 

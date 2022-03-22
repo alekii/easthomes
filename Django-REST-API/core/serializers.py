@@ -1,28 +1,26 @@
 from rest_framework import serializers
-from .models import Location, Property
+from .models import Location, Property, Agent
 
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ['location_name,longitude,latitude']
-
-    def update(self, instance, validated_data):
-        pass
-
-    def create(self, validated_data):
-        pass
+        fields = ['location_name', 'longitude', 'latitude']
 
 
 class PropertySerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
-        fields = ['id', 'name', 'price', 'description']
+        fields = ['id',  'name', 'price', 'description', 'location']
 
-    location = LocationSerializer()
+    location = serializers.StringRelatedField()
 
-    def update(self, instance, validated_data):
-        pass
 
-    def create(self, validated_data):
-        pass
+class AgentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Agent
+        fields = ['id','first_name', 'last_name', 'email', 'phone', 'properties_count']
+
+    properties_count = serializers.IntegerField()
+
+
