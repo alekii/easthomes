@@ -9,8 +9,6 @@ router.register('', views.PropertyList)
 urlpatterns = [
     path('agents/', views.AgentList.as_view()),
     path('agents/<int:pk>/', views.AgentDetail.as_view()),
-    path('s/', views.SearchResults.as_view()),
-    path('search/', views.  FilterResults.as_view()),
     path('', include(router.urls)),
     path('property/<int:pk>/', views.PropertyDetail.as_view())
     ]

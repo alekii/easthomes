@@ -15,6 +15,9 @@ from .serializers import PropertySerializer, AgentSerializer
 class PropertyList(ModelViewSet):
     queryset = Prop.objects.select_related('location').all()
     serializer_class = PropertySerializer
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ['name']
+    filterset_class = PropertyFilter
 
     def get_queryset(self):
         queryset = Prop.objects.select_related('location').all()
@@ -52,23 +55,3 @@ class AgentDetail(RetrieveUpdateDestroyAPIView):
             return Response({"Agent cannot be deleted as is associated with property"})
         agent.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class SearchResults(ListAPIView):
-    queryset = Prop.objects.select_related('location').all()
-    serializer_class = PropertySerializer
-    filter_backends = [SearchFilter]
-    search_fields = ['name']
-
-    def get_serializer_context(self):
-        return {'request': self.request}
-
-
-class FilterResults(ListAPIView):
-    queryset = Prop.objects.select_related('location').all()
-    serializer_class = PropertySerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = PropertyFilter
-
-    def get_serializer_context(self):
-        return {'request': self.request}
