@@ -34,4 +34,4 @@ class Location(models.Model):
     longitude = models.FloatField()
 
     def __str__(self) -> str:
-        return self.location_name
+        return self.location_name.__str__()
