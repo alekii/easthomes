@@ -4,11 +4,7 @@ from . import views
 
 
 router = SimpleRouter()
+router.register('agents', views.AgentList)
 router.register('', views.PropertyList)
 
-urlpatterns = [
-    path('agents/', views.AgentList.as_view()),
-    path('agents/<int:pk>/', views.AgentDetail.as_view()),
-    path('', include(router.urls)),
-    path('property/<int:pk>/', views.PropertyDetail.as_view())
-    ]
+urlpatterns = router.urls
