@@ -35,3 +35,8 @@ class Location(models.Model):
 
     def __str__(self) -> str:
         return self.location_name.__str__()
+
+
+class PropertyImage(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField(upload_to='core/images')

@@ -6,23 +6,23 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import PropertyFilter
-from .models import Property as Prop, Agent
-from .serializers import PropertySerializer, AgentSerializer
+from .models import Property as Prop, Agent, PropertyImage
+from .serializers import PropertySerializer, AgentSerializer, PropertyImageSerializer
 from .permissions import IsAdminOrReadOnly
 
 
 class PropertyList(ModelViewSet):
-    queryset = Prop.objects.select_related('location').all()
+    queryset = Prop.objects \
+        .prefetch_related('images') \
+        .select_related('agent') \
+        .select_related('location') \
+        .all()
     serializer_class = PropertySerializer
     filter_backends = [SearchFilter, DjangoFilterBackend, OrderingFilter]
     filterset_class = PropertyFilter
     search_fields = ['name']
     ordering_fields = ['price']
     permission_classes = [IsAdminOrReadOnly]
-
-    def get_queryset(self):
-        queryset = Prop.objects.select_related('location').all()
-        return queryset
 
     def get_serializer_context(self):
         return {'request': self.request}
@@ -40,3 +40,13 @@ class AgentList(ModelViewSet):
         if Agent.objects.filter(id=kwargs['pk']).count() > 0:
             return Response({"Agent cannot be deleted as is associated with property"})
         return super().destroy(request, *args, **kwargs)
+
+
+class PropertyImageViewSet(ModelViewSet):
+    serializer_class = PropertyImageSerializer
+
+    def get_serializer_context(self):
+        return {'property_id': self.kwargs['property_pk']}
+
+    def get_queryset(self):
+        return PropertyImage.objects.filter(property_id=self.kwargs['property_pk'])

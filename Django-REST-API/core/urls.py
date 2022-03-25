@@ -1,10 +1,15 @@
 from django.urls import path, include
-from rest_framework.routers import SimpleRouter
+from rest_framework_nested.routers import DefaultRouter
+from rest_framework_nested import routers
 from . import views
 
 
-router = SimpleRouter()
+router = routers.DefaultRouter()
 router.register('agents', views.AgentList)
 router.register('', views.PropertyList)
 
-urlpatterns = router.urls
+
+property_router = routers.NestedDefaultRouter(router, '', lookup="property")
+property_router.register('images', views.PropertyImageViewSet, basename="property-images")
+
+urlpatterns = router.urls + property_router.urls
