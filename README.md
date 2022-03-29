@@ -1,2 +1,2 @@
 # easthomes
-Property Listing for East Homes Ltd Company
+Real Estate property Listing for East Homes Ltd Company
