@@ -1,37 +1,45 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import About from "./about";
+import { Link } from "react-router-dom";
 class Nav extends Component {
   state = {};
   render() {
     return (
-      <Wrap>
+      <NavBar>
         <MenuItems>
-          <Logo> EastHomes </Logo>
+          <Logo><Link to="/">EastHomes</Link> </Logo>
           <LeftItems>
-              <li><a href="wwwmecom">ABout</a></li>
-              <li><a href="wwwmecom">Contact</a></li>
-          </LeftItems>
+              <li><Link to="/single">Single</Link></li>
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+           </LeftItems>
         </MenuItems>
-      </Wrap>
+      </NavBar>
     );
   }
 }
 
 export default Nav;
 
-const Wrap = styled.div`
+const NavBar = styled.div`
   width: 100%;
   height: 50px;
   background-color: #2699fb;
   position:fixed;
-  z-index:6
+  z-index:9
 `;
 
 const MenuItems = styled.div`
   max-width: 1366px;
   margin: 0 auto;
-  display:flex;justify-content:space-between
+  display:flex;justify-content:space-between;
 
+  a { 
+    text-decoration:none;
+    color:white;
+  }
+  
 `;
 
 const Logo = styled.h1`
@@ -52,11 +60,9 @@ display:flex;
     margin-top:16px;
     font-size:16px;
     font-family: "Roboto";
-    font-weight:bold
+    font-weight:bold;
+    cursor:pointer;
   }
-   li a {
-  text-decoration:none;
-  color:white;
-
-   }
+  
+    
 `

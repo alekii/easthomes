@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import Nav from "./nav";
-import Footer from "./footer";
+import styled from "styled-components"; 
 import Hero from "./hero";
 import PropertyCard from "./PropertyCard";
 import Paginator from "./paginator";
@@ -11,9 +9,7 @@ class Home extends Component {
   state = {};
   render() {
     return (
-      <Wrap>
-        <Nav></Nav>
-        <SearchBar></SearchBar>
+      <Wrap> 
         <Hero></Hero>
         <PropertyForSaleHeading>
           <h2>Property for Sale</h2>
@@ -25,8 +21,7 @@ class Home extends Component {
         </WhiteBackground>
         <Wave></Wave>
           <PropertyCard></PropertyCard>
-          <Paginator></Paginator>
-        <Footer></Footer>
+          <Paginator></Paginator> 
       </Wrap>
     );
   }
@@ -37,8 +32,7 @@ export default Home;
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
+  justify-content: space-between; 
 `;
 
 const PropertyForSaleHeading = styled.div`

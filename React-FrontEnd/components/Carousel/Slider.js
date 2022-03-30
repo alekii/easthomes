@@ -16,7 +16,7 @@ function Slider(props) {
       setCurrentImageIndex(
         currentImageIndex === length - 1 ? 0 : currentImageIndex + 1
       );
-    }, 15000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [currentImageIndex]);
 
@@ -37,17 +37,17 @@ function Slider(props) {
 
   const showButtons = () => {
       firstbutton.current.style.transform = "translateX(0)"
-      lastbutton.current.style.transform = "translateX(0)" 
+      lastbutton.current.style.transform = "translateX(0)"
       firstbutton.current.style.transition = "transform 0.7s ease"
       lastbutton.current.style.transition = "transform 0.7s ease"
-      
+
   }
   const hideButtons = () => {
     firstbutton.current.style.transform = "translateX(-100vw)"
-    lastbutton.current.style.transform = "translateX(100vw)" 
+    lastbutton.current.style.transform = "translateX(100vw)"
     firstbutton.current.style.transition = "transform 1s ease"
     lastbutton.current.style.transition = "transform 1s ease"
-    
+
 }
   const str = "/img/";
 
@@ -89,7 +89,7 @@ const Button = styled.button`
   color:#2699FB;
   cursor: pointer;
   z-index:1;
-  margin: 0 10px; 
+  margin: 0 10px;
 
   &: first-child{
       transform:translateX(-101vw)
@@ -100,28 +100,28 @@ const Button = styled.button`
 `
 
 const ImageHolder = styled.div`
- 
+
 width: 100%;
 max-width:1366px;
 height: 718px;
 position:absolute;
 background-size:cover;
-background-repeat:none; 
-animation: fadeIn 3s ease-in; 
- 
+background-repeat:none;
+animation: fadeIn 1.5s ease;
+
 @keyframes fadeIn {
-    0%{opacity:0.8; 
+    0%{opacity:0.9;
     }
     100%{opacity:1; }
-} 
+}
 `
 
-const Holder = styled.div` 
+const Holder = styled.div`
 display:flex;
 justify-content:space-between;
 width:100%;
 height:inherit;
- 
+
 `
 
 

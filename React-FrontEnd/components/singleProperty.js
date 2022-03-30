@@ -1,0 +1,142 @@
+import React, { Component } from "react";
+import SearchBar from "./SearchBar";
+import styled from "styled-components"; 
+
+class Single extends Component {
+  state = {}; 
+  render() {
+    return (
+      <Content>
+        <SearchBar />
+        <div className="content">
+          <h2>Bungalow in South Nairobi</h2>
+           <h3>Kshs 4,568,870</h3>
+          <ImgHolder>
+            <img src="/img/exterior-00.jpg" />
+          </ImgHolder>
+          <ContentMain>
+            <ContentLeft>
+                <h4>Property Details</h4>
+              <p>
+                Contrary to popular belief, Lorem Ipsum is not simply random
+                text. It has roots in a piece of classical Latin literature from
+                45 BC, making it over 2000 years old. Richard McClintock, a
+                Latin professor at Hampden-Sydney College in Virginia, looked up
+                one of the more obscure Latin words, consectetur, from a Lorem
+                Ipsum passage, and going through the cites of the word in
+                classical literature, discovered the undoubtable source. Lorem
+                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
+                Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+                written in 45 BC. This book is a treatise on the theory of
+                ethics, very popular during the Renaissance. The first line of
+                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
+                in section 1.10.32. The standard chunk of Lorem Ipsum used since
+                the 1500s is reproduced below for those interested. Sections
+                1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by
+                Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H.
+                Rackham.
+              </p>
+              <p>
+                Contrary to popular belief, Lorem Ipsum is not simply random
+                text. It has roots in a piece of classical Latin literature from
+                45 BC, making it over 2000 years old. Richard McClintock, a
+                Latin professor at Hampden-Sydney College in Virginia, looked up
+                one of the more obscure Latin words, consectetur, from a Lorem
+                Ipsum passage, and going through the cites of the word in
+                classical literature, discovered the undoubtable source. Lorem
+                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
+                Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+                written in 45 BC. This book is a treatise on the theory of
+                ethics, very popular during the Renaissance. The first line of
+                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
+                in section 1.10.32. The standard chunk of Lorem Ipsum used since
+                the 1500s is reproduced below for those interested. Sections
+                1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by
+                Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H.
+                Rackham.
+              </p>
+            </ContentLeft>
+            <ContentRight>
+                <AgentImgHolder>
+                <img src="/img/agent-00.jpg"/><p> </p>
+                <p><strong>Agent Name:</strong> Alice Bennet</p>
+                <p><strong>Phone:</strong> +2548567834</p>
+                <p><strong>Email:</strong> email@email.com</p>
+                </AgentImgHolder> 
+            </ContentRight>
+          </ContentMain>
+        </div>
+      </Content>
+    );
+  }
+}
+
+export default Single;
+const Content = styled.div`
+  width: 100%;
+  h2,h3{ 
+      width:80%;
+      margin:0 auto;
+      font-size:21px;
+      font-weight:bold;
+      line-height:34px;
+  }
+    h3{
+        color:#20B759;
+      }
+  
+`;
+const ImgHolder = styled.div`
+  height: 530px;
+  width: 80%;
+  margin: 20px auto 20px auto;
+  max-width: 1366px; 
+
+  img {
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+  }
+`;
+const ContentMain = styled.div`
+  display: flex;
+  width: 80%;
+  max-width: 1366px;
+  justify-content:space-between;
+  margin: 0 auto;
+`;
+const ContentLeft = styled.div`
+  width: 64%;
+  background-color:white;
+  padding:20px;
+
+  p{
+      margin-top:10px;
+      letter-spacing:0.7px;
+      word-spacing:7px
+  }
+`;
+const ContentRight = styled.div`
+  width: 34%;
+  height:350px;
+  background-color:white;
+  border: 1px solid #bce0fd;
+`;
+const AgentImgHolder = styled.div` 
+  width:200px; 
+  margin:20px auto 0 auto; 
+  img{
+  margin-bottom:10px;
+  height:200px;
+  width:100%;
+  border-radius:50%;
+  }
+
+  p{
+      line-height:30px;
+ 
+  }
+
+`
