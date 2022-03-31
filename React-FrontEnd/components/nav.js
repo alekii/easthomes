@@ -25,7 +25,7 @@ export default Nav;
 const NavBar = styled.div`
   width: 100%;
   height: 50px;
-  background-color: #2699fb;
+  background-color: #1ea69a;
   position:fixed;
   z-index:9
 `;

@@ -2,9 +2,21 @@ import React, { Component, createRef } from "react";
 import styled from "styled-components";
 import Slider from "./Carousel/Slider";
 import "../css/hero.css";
+import Select from "../common/select";
+import Form from "../common/form";
 
-class Hero extends Component {
-  state = {};
+class Hero extends Form {
+  towns = ["Nairobi", "Kajiado", "Kiambu", "Machakos"];
+  bedrooms = [1, 2, 3, 4];
+  state = {
+    query: {
+      town: this.towns[0],
+      bedrooms: this.bedrooms[0],
+      minprice: "0",
+      maxprice: "0",
+    },
+    errors: {},
+  };
 
   imagesData = [
     "q1.jpg",
@@ -16,39 +28,31 @@ class Hero extends Component {
     "home3.jpeg",
     "home4.jpeg",
   ];
+
+  submit = () => {
+    console.log(this.state.query)
+  };
   render() {
+    const { query, errors } = this.state;
     return (
       <HeroSection>
         <Slider slides={this.imagesData} />
         <PropertySearch>
           <h2>Property Search</h2>
 
-          <form>
-            <label htmlFor="town">Town</label>
-            <select name="towns" id="towns">
-              <option value="Nairobi">Nairobi</option>
-              <option>Kiambu</option>
-              <option>Kajiado</option>
-              <option>Machakos</option>
-            </select>
-            <label htmlFor="bedroom">Bedrooms</label>
-            <select name="rooms" id="rooms">
-              <option value="4">4</option>
-              <option>3</option>
-              <option>2</option>
-              <option>1</option>
-            </select>
+          <form onSubmit={this.handleSubmit}>
+            {this.renderSelect('','town','Town',this.towns)}
+            {this.renderSelect('','bedrooms','Bedrooms',this.bedrooms)}
+         
             <Price>
               <MinPrice>
-                <label htmlFor="MinPrice">Min Price</label>
-                <input type="text" name="MinPrice" id="minprie" />
+              {this.renderInput('','minprice','Min Price')}
+              
               </MinPrice>
               <MaxPrice>
-                <label htmlFor="MaxPrice">Max Price</label>
-                <input type="text" name="MinPrice" id="maxprice" />
+                {this.renderInput('','maxprice','Max Price')}
               </MaxPrice>
             </Price>
-
             <input type="submit" name="search" id="search" value="Search" />
           </form>
         </PropertySearch>
@@ -111,7 +115,7 @@ const PropertySearch = styled.div`
     font-weight: 400;
     font-size: 16px;
     border: 1px solid #bce0fd;
-    background-color:inherit
+    background-color: inherit;
   }
 
   input {

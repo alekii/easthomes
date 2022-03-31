@@ -1,63 +1,57 @@
 import React, { Component } from "react";
 import styled from "styled-components"; 
-import "../css/styles.css"
+import "../css/styles.css"; 
+import Form from '../common/form';
 
-function SearchBar() {
-  return ( 
+
+class SearchBar extends Form { 
+  towns = ["Nairobi", "Kajiado", "Kiambu", "Machakos"];
+  bedrooms = [1, 2, 3, 4];
+  state = {
+    query: { town:this.towns[0] , bedrooms: this.bedrooms[0], minprice: "0", maxprice: "0" },
+    errors: {},
+  };
+  
+ submit =()=>{
+
+  console.log(this.state.query)
+ }
+  render() {
+    const { query, errors } = this.state;
+    return (
       <Bar>
-      <form>
-        {" "}
-        <PropertySearch>
-        <div className="searchterms">
-          <label htmlFor="town">Town</label>
-          <select name="towns" id="towns">
-            <option value="Nairobi">Nairobi</option>
-            <option>Kiambu</option>
-            <option>Kajiado</option>
-            <option>Machakos</option>
-          </select>
-        </div>
-        <div className="searchterms">
-          <label htmlFor="bedroom">Bedrooms</label>
-          <select name="rooms" id="rooms">
-            <option value="4">4</option>
-            <option>3</option>
-            <option>2</option>
-            <option>1</option>
-          </select>
-        </div> 
-        <div className="searchterms">
-            <label htmlFor="MinPrice">Min Price</label>
-            <input type="text" name="MinPrice" id="minprie" />
-          </div>
-        <div className="searchterms">
-            <label htmlFor="MaxPrice">Max Price</label>
-            <input type="text" name="MinPrice" id="maxprice" />
-          </div>
-        <div className="searchterms">
-          <input type="submit" name="search" id="search" value="Search" />
-        </div>
-        </PropertySearch>
-      </form>
-       </Bar>
-  );
+        <form onSubmit={this.handleSubmit}>
+          {" "}
+          <PropertySearch>
+           {this.renderSelect('searchterms','town','Town',this.towns)}
+           {this.renderSelect('searchterms','bedrooms','Bed Rooms',this.bedrooms)}
+           {this.renderInput('searchterms','minprice','Min Price')}
+           {this.renderInput('searchterms','maxprice','Max Price')}
+            <div className="searchterms">
+              <input type="submit" name="search" id="search" value="Search" />
+            </div>
+          </PropertySearch>
+        </form>
+      </Bar>
+    );
+  }
 }
 
 export default SearchBar;
 const Bar = styled.div`
-   width:100%;
-`
-const PropertySearch = styled.div` 
-  width:100%;
-  padding:10px 50px 0 50px;
+  width: 100%;
+`;
+const PropertySearch = styled.div`
+  width: 100%;
+  padding: 10px 50px 0 50px;
   position: fixed;
   top: 50px;
   z-index: 8;
   display: flex;
   flex: 1;
-  justify-content:space-around;
+  justify-content: space-around;
   background-color: #f7f7f7;
-  border: 2px solid #bce0fd;  
+  border: 2px solid #bce0fd;
 
   label {
     font-weight: 500;
@@ -71,10 +65,11 @@ const PropertySearch = styled.div`
     font-weight: 400;
     font-size: 16px;
     border: 1px solid #bce0fd;
-    background-color:inherit
+    background-color: inherit;
   }
 
-  input,select {
+  input,
+  select {
     padding: 5px;
   }
 
@@ -85,10 +80,10 @@ const PropertySearch = styled.div`
     background-color: #1ea69a;
     color: white;
     border: none;
-    border-radius: 4px; 
+    border-radius: 4px;
     cursor: pointer;
-    width:100%;
-    margin-top:29px;
+    width: 100%;
+    margin-top: 29px;
   }
 
   select:focus,
@@ -96,4 +91,3 @@ const PropertySearch = styled.div`
     outline: none;
   }
 `;
- 

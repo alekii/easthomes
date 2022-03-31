@@ -33,7 +33,7 @@ function footer(){
 export default footer;
 
 const Footer = styled.div`
-background-color:#2699FB;
+background-color:#1ea69a;
 width:100%;
 margin-top:50px
 `

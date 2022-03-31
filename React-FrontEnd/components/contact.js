@@ -3,7 +3,12 @@ import SearchBar from "./SearchBar";
 import "../css/styles.css";
 import styled from "styled-components";
 class Contact extends Component {
-  state = {};
+  state = {
+    formData:{name:'',email:'',message:''}
+  };
+  handleSubmit = () =>{ 
+    
+  }
   render() {
     return (
       <Content>
@@ -17,13 +22,13 @@ class Contact extends Component {
           <p>Email: info@easthomes.com</p>
           <p>WhatsApp +25478634324</p>
           <Form>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <label htmlFor="name">Name</label>
-              <input type="text" />
+              <input type="text" name="name"/>
               <label htmlFor="email">email</label>
-              <input type="email" />
+              <input type="email" name="email" />
               <label htmlFor="message">Message</label>
-              <textarea></textarea>
+              <textarea name="message"></textarea>
               <input type="submit" value="Send Message"/>
             </form>
           </Form>
