@@ -7,13 +7,14 @@ from rest_framework.viewsets import ModelViewSet
 
 from .filters import PropertyFilter
 from .models import Property as Prop, Agent, PropertyImage
-from .serializers import PropertySerializer, AgentSerializer, PropertyImageSerializer
+from .serializers import PropertySerializer, AgentSerializer, PropertyImageSerializer, AgentImageSerializer
 from .permissions import IsAdminOrReadOnly
 
 
 class PropertyList(ModelViewSet):
     queryset = Prop.objects \
         .prefetch_related('images') \
+        .prefetch_related('agent__agentimages') \
         .select_related('agent') \
         .select_related('location') \
         .all()
@@ -29,7 +30,7 @@ class PropertyList(ModelViewSet):
 
 
 class AgentList(ModelViewSet):
-    queryset = Agent.objects.annotate(properties_count=Count('properties')).all()
+    queryset = Agent.objects.prefetch_related('agentimages')
     serializer_class = AgentSerializer
     permission_classes = [IsAdminUser]
 
@@ -50,3 +51,13 @@ class PropertyImageViewSet(ModelViewSet):
 
     def get_queryset(self):
         return PropertyImage.objects.filter(property_id=self.kwargs['property_pk'])
+
+
+class AgentImageViewSet(ModelViewSet):
+    serializer_class = AgentImageSerializer
+
+    def get_serializer_context(self):
+        return {'agent_id': self.kwargs['agent_pk']}
+
+    def get_queryset(self):
+        return PropertyImage.objects.filter(agent_id=self.kwargs['agent_pk'])
