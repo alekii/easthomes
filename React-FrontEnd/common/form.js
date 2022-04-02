@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "./input";
-import Select from "./select";
+import Select from "./select"; 
+import { searchProperty } from './../services/propertyService'; 
 
 class Form extends Component {
   state = {
@@ -24,13 +25,15 @@ class Form extends Component {
 
     return Object.keys(errors).length === 0 ? null : errors;
   };
-  handleSubmit = (e) => {
+  handleSubmit = async(e) => {
     e.preventDefault();
     const errors = this.validateForm();
     this.setState({ errors: errors || {} });
-    if (errors) return;
-    this.submit();
+    if (errors) return;  
+    this.redirect()  
   };
+
+
   handleChange = ({ currentTarget: input }) => {
     const query = { ...this.state.query };
     query[input.name] = input.value;

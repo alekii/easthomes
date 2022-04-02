@@ -2,8 +2,9 @@ import React, { Component, createRef } from "react";
 import styled from "styled-components";
 import Slider from "./Carousel/Slider";
 import "../css/hero.css";
-import Select from "../common/select";
 import Form from "../common/form";
+import { Redirect } from "react-router-dom";
+import SearchResults from "./searchResults";
 
 class Hero extends Form {
   towns = ["Nairobi", "Kajiado", "Kiambu", "Machakos"];
@@ -12,10 +13,11 @@ class Hero extends Form {
     query: {
       town: this.towns[0],
       bedrooms: this.bedrooms[0],
-      minprice: "0",
-      maxprice: "0",
+      minprice: "1000000",
+      maxprice: "10000000",
     },
     errors: {},
+    redirect:false
   };
 
   imagesData = [
@@ -29,10 +31,23 @@ class Hero extends Form {
     "home4.jpeg",
   ];
 
-  submit = () => {
-    console.log(this.state.query)
+  redirect = () =>{  
+    let redirect = this.state.redirect
+    redirect=true; 
+    this.setState({redirect}) 
   };
   render() {
+      if(this.state.redirect){ 
+        const {town, minprice,maxprice} = this.state.query
+        console.log(town) 
+        console.log(minprice) 
+        console.log(maxprice)
+        let search = `/search/${town}/${minprice}/${maxprice}`
+        console.log(search)
+      return( 
+        <><Redirect to={{pathname:search}}/>
+        </>)
+    }
     const { query, errors } = this.state;
     return (
       <HeroSection>
@@ -41,25 +56,25 @@ class Hero extends Form {
           <h2>Property Search</h2>
 
           <form onSubmit={this.handleSubmit}>
-            {this.renderSelect('','town','Town',this.towns)}
-            {this.renderSelect('','bedrooms','Bedrooms',this.bedrooms)}
-         
+            {this.renderSelect("", "town", "Town", this.towns)}
+            {this.renderSelect("", "bedrooms", "Bedrooms", this.bedrooms)}
+
             <Price>
               <MinPrice>
-              {this.renderInput('','minprice','Min Price')}
-              
+                {this.renderInput("", "minprice", "Min Price")}
               </MinPrice>
               <MaxPrice>
-                {this.renderInput('','maxprice','Max Price')}
+                {this.renderInput("", "maxprice", "Max Price")}
               </MaxPrice>
             </Price>
             <input type="submit" name="search" id="search" value="Search" />
+          
           </form>
         </PropertySearch>
         <AmSoWavy style={{ backgroundImage: "url(/img/theone.svg)" }}>
           <AboutUs>
             <h3>About Us</h3>
-            <p>
+            <p id ="scrollIntoView">
               We are a real estate agent based in Nairobi with focus on property
               sales
             </p>

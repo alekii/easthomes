@@ -1,18 +1,36 @@
-import React, { Component } from "react";
+import React from "react";
 import SearchBar from "./SearchBar";
-import styled from "styled-components"; 
+import styled from "styled-components";   
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min'; 
+import  {getProperty}  from '../services/propertyService';
 
-class Single extends Component {
-  state = {}; 
-  render() {
-    return (
+function Single() {   
+  const [response, setResponse] = React.useState([])
+  const [isLoaded, setIsLoaded] = React.useState(false)
+  const {id} = useParams() 
+
+React.useEffect(()=>{  
+  fetchData();
+},[]) 
+
+async function fetchData(){
+  const res = await getProperty(id);
+  setResponse(res)
+  setIsLoaded(true) 
+}
+  if(!isLoaded){
+    return(
+      <h4 style={{marginTop:"40vh",paddingBottom:"80vh",textAlign:"center"}}>Loading...</h4>
+    )
+  }
+    return ( 
       <Content>
         <SearchBar />
         <div className="content">
-          <h2>Bungalow in South Nairobi</h2>
+          <h2>Bungalow in South Nairobi- {id}</h2>
            <h3>Kshs 4,568,870</h3>
           <ImgHolder>
-            <img src="/img/exterior-00.jpg" />
+            <img src="/img/exterior-00.jpg" alt="" />
           </ImgHolder>
           <ContentMain>
             <ContentLeft>
@@ -60,18 +78,18 @@ class Single extends Component {
             </ContentLeft>
             <ContentRight>
                 <AgentImgHolder>
-                <img src="/img/agent-00.jpg"/><p> </p>
-                <p><strong>Agent Name:</strong> Alice Bennet</p>
-                <p><strong>Phone:</strong> +2548567834</p>
-                <p><strong>Email:</strong> email@email.com</p>
+                <img src="/img/agent-00.jpg" alt=""/><p> </p> 
+                <p><strong>Agent Name:</strong> {`${response.data.agent.first_name}`}</p>
+                <p><strong>Phone:</strong> {response.data.agent.phone}</p>
+                <p><strong>Email:</strong> {response.data.agent.email}</p>
                 </AgentImgHolder> 
             </ContentRight>
           </ContentMain>
         </div>
-      </Content>
-    );
+      </Content> 
+    )
   }
-}
+
 
 export default Single;
 const Content = styled.div`

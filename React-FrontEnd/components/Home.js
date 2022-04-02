@@ -1,27 +1,20 @@
-import React, { Component } from "react";
-import styled from "styled-components"; 
+ import React, { Component } from "react"; 
+ import styled from "styled-components"; 
 import Hero from "./hero";
-import PropertyCard from "./PropertyCard";
-import Paginator from "./paginator";
-import SearchBar from "./SearchBar";
+import Items from "./items";
 
-class Home extends Component {
-  state = {};
-  render() {
+class Home extends Component { 
+  state={  
+  }
+ 
+  render() { 
     return (
       <Wrap> 
         <Hero></Hero>
-        <PropertyForSaleHeading>
+        <PropertyForSaleHeading >
           <h2>Property for Sale</h2>
         </PropertyForSaleHeading>
-        <PropertyCard></PropertyCard>
-        <WhiteWave></WhiteWave>
-        <WhiteBackground>
-          <PropertyCard></PropertyCard>
-        </WhiteBackground>
-        <Wave></Wave>
-          <PropertyCard></PropertyCard>
-          <Paginator></Paginator> 
+        <Items></Items>
       </Wrap>
     );
   }
@@ -33,6 +26,7 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
+   
 `;
 
 const PropertyForSaleHeading = styled.div`
@@ -44,27 +38,4 @@ const PropertyForSaleHeading = styled.div`
     text-align: center;
     padding: 30px 0;
   }
-`;
-
-const WhiteWave = styled.div`
-background-image:url("/img/wavewhite.svg");
-width:100%; 
-background-repeat:no-repeat; 
-background-size:cover;  
-padding-bottom: 210px; 
-}
-`;
-const Wave = styled.div`
-background-image:url("/img/theone.svg");
-width:100%; 
-background-repeat:no-repeat; 
-background-size:cover; 
-padding: 100px;
-margin-top: -200px;
-}
-
-`;
-const WhiteBackground = styled.div`
-  background-color: #fff;
-  padding-bottom:210px
 `;

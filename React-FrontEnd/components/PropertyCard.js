@@ -1,27 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-
-function PropertyCard() { 
-  return (
+import {Link} from 'react-router-dom'
+import CurrencyFormat from "react-currency-format";
+const PropertyCard=({data})=> { 
+   return (
     <PropertyRow>
-      <SinglePropertyCard>
-        <img src="/img/exterior-01.jpg"  alt=""/>
-        <h3>Bungalow in South Side</h3>
-        <h4>4 bedrooms</h4>
-        <p>Kshs 6,534,000</p>
-      </SinglePropertyCard>{" "}
-      <SinglePropertyCard>
-        <img src="/img/exterior-01.jpg" alt=""/>
-        <h3>Bungalow in South Side</h3>
-        <h4>4 bedrooms</h4>
-        <p>Kshs 6,534,000</p>
-      </SinglePropertyCard>{" "}
-      <SinglePropertyCard>
-        <img src="/img/exterior-01.jpg" alt=""/>
-        <h3>Bungalow in South Side</h3>
-        <h4>4 bedrooms</h4>
-        <p>Kshs 6,534,000</p>
-      </SinglePropertyCard>
+       { data.map((property,index)=>{
+         console.log()
+           return(   <SinglePropertyCard key={index}> 
+                  <Link to={`/single/${data[index].id}`}>
+                  <img src="/img/exterior-01.jpg" alt=""/>
+                  </Link>  
+                  <h3>h3</h3>
+                  <h4>4 bedrooms</h4>
+                  <p>
+                    <CurrencyFormat value={property.price} displayType="text" thousandSeparator={true} prefix={'Kshs '}/>
+                  </p>
+              </SinglePropertyCard>
+        ) })}; 
     </PropertyRow>
   );
 }
@@ -33,7 +29,7 @@ const PropertyRow = styled.div`
   display: flex;
   flex: 1;
   max-width: 1366px;
-  margin: 0 40px 40px 40px;
+  margin: 0 0 40px 0;
   justify-content: space-around;
   width:100%;
   margin:0 auto;
@@ -46,6 +42,7 @@ const SinglePropertyCard = styled.div`
   img {
     width: 400px;
     height: 350px;
+    cursor:pointer;
   }
   @media (max-width: 1300px) {
     img {
@@ -67,7 +64,7 @@ const SinglePropertyCard = styled.div`
       h4 {
         font-size: 14px;
       }
-      p {
+      span{
         font-size: 16px;
       }
   }
@@ -80,7 +77,7 @@ const SinglePropertyCard = styled.div`
     font-size: 15.7px;
     line-height: 30px;
   }
-  p {
+  span{
     line-height: 30px;
     color: #20b759;
     font-size: 18px;
