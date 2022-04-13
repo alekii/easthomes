@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-import os
 import os.path
 from datetime import timedelta
 from pathlib import Path
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.conf.global_settings import DATABASES
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--7!nb-a_98ddnixg@9i0b5t+yv%psx6h=6*7+ta+x&jjr4c0@-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -68,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.whitenoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'easthomes.urls'
@@ -93,16 +94,6 @@ WSGI_APPLICATION = 'easthomes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'easthomes',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'PORT': '3306',
-        'HOST': '127.0.0.1'
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -160,3 +151,8 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1)
 }
+
+import dj_database_url
+
+prod_db = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
