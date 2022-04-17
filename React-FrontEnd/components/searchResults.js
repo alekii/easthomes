@@ -1,5 +1,4 @@
-import React from "react";
-import Paginator from "./paginator";
+import React from "react"; 
 import PropertyCard from "./PropertyCard"; 
 import {searchProperty} from '../services/propertyService';  
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
@@ -31,9 +30,8 @@ const SearchResults =() =>{
    if(!IsDataReady){
     return (
       <h4 style={{marginTop:"40vh",paddingBottom:"80vh",textAlign:"center"}}>Loading...</h4>
-      )
-   }if(!dataPresent){
-     console.log(data.data.count===0)
+      ) 
+   }if(!dataPresent){  
     return (
       <h4 style={{marginTop:"40vh",paddingBottom:"80vh",textAlign:"center"}}>No Results Found</h4>
       )
@@ -41,8 +39,7 @@ const SearchResults =() =>{
   return (
     
     <Wrap><h2>Showing {data.data.count} results for {town} town </h2>
-    <PropertyCard data={data.data.results}></PropertyCard> 
-    <Paginator no_of_pages={no_of_pages}></Paginator>  
+    <PropertyCard data={data.data.results}></PropertyCard>  
     </Wrap>
       
      )

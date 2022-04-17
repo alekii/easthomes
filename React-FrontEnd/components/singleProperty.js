@@ -11,10 +11,9 @@ function Single() {
 
 React.useEffect(()=>{  
   fetchData();
-},[]) 
-
-async function fetchData(){
-  const res = await getProperty(id);
+},[])  
+async function fetchData(){ 
+  const res = await getProperty(id);  
   setResponse(res)
   setIsLoaded(true) 
 }
@@ -22,12 +21,12 @@ async function fetchData(){
     return(
       <h4 style={{marginTop:"40vh",paddingBottom:"80vh",textAlign:"center"}}>Loading...</h4>
     )
-  }
+  } 
     return ( 
       <Content>
         <SearchBar />
-        <div className="content">
-          <h2>Bungalow in South Nairobi- {id}</h2>
+        <div className="content"> 
+          <h2>Bungalow in South Nairobi</h2> 
            <h3>Kshs 4,568,870</h3>
           <ImgHolder>
             <img src="/img/exterior-00.jpg" alt="" />
@@ -95,14 +94,16 @@ export default Single;
 const Content = styled.div`
   width: 100%;
   h2,h3{ 
-      width:80%;
-      margin:0 auto;
-      font-size:21px;
-      font-weight:bold;
-      line-height:34px;
+      width:80%; 
+      margin:0 auto;  
+      line-height:34px; 
+      @media(max-width:995px){
+        width:95%; 
+         
+    }
   }
     h3{
-        color:#20B759;
+        color:#5d7482; 
       }
   
 `;
@@ -116,14 +117,29 @@ const ImgHolder = styled.div`
     height: 500px;
     width: 100%;
     object-fit: cover;
-  }
+  } 
+   
+  @media(max-width:995px){
+    width:95%;
+    height:auto;
+    img{
+      height:auto;
+    }
+} 
 `;
 const ContentMain = styled.div`
   display: flex;
   width: 80%;
   max-width: 1366px;
   justify-content:space-between;
-  margin: 0 auto;
+  margin: 0 auto; 
+   @media(max-width:995px){
+    width:95%;  
+   }
+    @media(max-width:768px){
+      display: block;
+    }
+  
 `;
 const ContentLeft = styled.div`
   width: 64%;
@@ -133,21 +149,28 @@ const ContentLeft = styled.div`
   p{
       margin-top:10px;
       letter-spacing:0.7px;
-      word-spacing:7px
-  }
+      word-spacing:7px 
+  } 
+  @media(max-width:768px){
+    width:100%
+}
 `;
 const ContentRight = styled.div`
   width: 34%;
-  height:350px;
+  height:374px;
   background-color:white;
   border: 1px solid #bce0fd;
+   @media(max-width:768px){
+    width:100%;
+    margin-top: 20px;
+}
 `;
 const AgentImgHolder = styled.div` 
-  width:200px; 
+  width:214px; 
   margin:20px auto 0 auto; 
   img{
   margin-bottom:10px;
-  height:200px;
+  height:214px; 
   width:100%;
   border-radius:50%;
   }

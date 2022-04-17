@@ -20,15 +20,10 @@ class Hero extends Form {
     redirect:false
   };
 
-  imagesData = [
-    "q1.jpg",
-    "q2.jpg",
-    "exterior-00.jpg",
-    "exterior-01.jpg",
-    "exterior-05.jpg",
-    "home1.jpeg",
-    "home3.jpeg",
-    "home4.jpeg",
+  imagesData = [ 
+    "exterior-00.jpg", 
+    "exterior-01.jpg", 
+    "exterior-05.jpg" 
   ];
 
   redirect = () =>{  
@@ -37,13 +32,9 @@ class Hero extends Form {
     this.setState({redirect}) 
   };
   render() {
-      if(this.state.redirect){ 
-        const {town, minprice,maxprice} = this.state.query
-        console.log(town) 
-        console.log(minprice) 
-        console.log(maxprice)
-        let search = `/search/${town}/${minprice}/${maxprice}`
-        console.log(search)
+      if(this.state.redirect){  
+        const {town, minprice,maxprice} = this.state.query 
+        let search = `/search/${town}/${minprice}/${maxprice}`  
       return( 
         <><Redirect to={{pathname:search}}/>
         </>)
@@ -52,13 +43,11 @@ class Hero extends Form {
     return (
       <HeroSection>
         <Slider slides={this.imagesData} />
-        <PropertySearch>
-          <h2>Property Search</h2>
-
+        <PropertySearch> 
+          <h2>Property Search</h2> 
           <form onSubmit={this.handleSubmit}>
             {this.renderSelect("", "town", "Town", this.towns)}
-            {this.renderSelect("", "bedrooms", "Bedrooms", this.bedrooms)}
-
+            {this.renderSelect("", "bedrooms", "Bedrooms", this.bedrooms)}  
             <Price>
               <MinPrice>
                 {this.renderInput("", "minprice", "Min Price")}
@@ -66,9 +55,8 @@ class Hero extends Form {
               <MaxPrice>
                 {this.renderInput("", "maxprice", "Max Price")}
               </MaxPrice>
-            </Price>
-            <input type="submit" name="search" id="search" value="Search" />
-          
+            </Price> 
+            <input type="submit" name="search" id="search" value="Search" /> 
           </form>
         </PropertySearch>
         <AmSoWavy style={{ backgroundImage: "url(/img/theone.svg)" }}>
@@ -86,15 +74,18 @@ class Hero extends Form {
 }
 
 export default Hero;
-
-const HeroSection = styled.div`
-  height: 718px;
+ 
+const HeroSection = styled.div` 
   max-width: 1366px;
   margin: 0 auto;
   width: 100%;
+  height:718px;
+  @media(max-width:540px){
+    height:370px
+  }
 `;
-const Slides = styled.div``;
-
+const Slides = styled.div`
+ `; 
 const PropertySearch = styled.div`
   background-color: #f7f7f7;
   z-index: 5;
@@ -104,7 +95,29 @@ const PropertySearch = styled.div`
   left: 65%;
   top: 248px;
   border: 2px solid #bce0fd;
+ 
+  @media(max-width:1220px){
+     left:55%
+  }
+  @media(max-width:980px){
+    left:45%;
 
+ }
+ 
+@media(max-width:768px){
+  left:27%;
+  top:117px 
+}
+@media(max-width:600px){
+  left:17%; 
+}
+@media(max-width:540px){
+   position:relative;
+   width:100%;
+   top:50px;
+   left:0 ;
+}
+ 
   h2 {
     font-family: "Arial", serif;
     font-size: 19px;
@@ -152,7 +165,7 @@ const PropertySearch = styled.div`
   select:focus,
   input:focus {
     outline: none;
-  }
+  } 
 `;
 
 const Price = styled.div`
@@ -174,16 +187,28 @@ const AmSoWavy = styled.div`
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  max-width: 1366px;
+  max-width: 1366px; 
+  @media(max-width:1220px){
+    top:550px
+ }@media(max-width:980px){
+  top:510px
+}@media(max-width:540px){
+  display:none 
+} 
 `;
 
 const AboutUs = styled.div`
   max-width: 516px;
   margin: 0 auto;
   height: 93px;
-  width: 100%;
-  margin-top: 110px;
+  width: 100%; 
+  margin-top: 120px;
   z-index: 4;
+  @media(max-width:1220px){
+    margin-top:140px
+ } @media(max-width:980px){
+  margin-top:180px
+} 
   h3 {
     color: #1a1a1a;
     font-size: 20px;

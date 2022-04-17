@@ -16,16 +16,14 @@ function Slider(props) {
       setCurrentImageIndex(
         currentImageIndex === length - 1 ? 0 : currentImageIndex + 1
       );
-    }, 5000);
+    }, 15000);
     return () => clearInterval(interval);
   }, [currentImageIndex]);
-
-  const nextImage = () => {
-    console.log("length" + length);
+ 
+  const nextImage = () => { 
     setCurrentImageIndex(
       currentImageIndex === length - 1 ? 0 : currentImageIndex + 1
-    );
-    console.log(currentImageIndex);
+    );  
   };
 
   const prevImage = () => {

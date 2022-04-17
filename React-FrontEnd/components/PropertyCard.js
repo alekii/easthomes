@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import {Link} from 'react-router-dom'
-import CurrencyFormat from "react-currency-format";
-const PropertyCard=({data})=> { 
+import CurrencyFormat from "react-currency-format"; 
+let i =0;
+const PropertyCard=({data})=> {   
    return (
     <PropertyRow>
        { data.map((property,index)=>{
@@ -16,8 +17,8 @@ const PropertyCard=({data})=> {
                   <p>
                     <CurrencyFormat value={property.price} displayType="text" thousandSeparator={true} prefix={'Kshs '}/>
                   </p>
-              </SinglePropertyCard>
-        ) })}; 
+              </SinglePropertyCard> 
+        ) })} 
     </PropertyRow>
   );
 }
@@ -66,7 +67,50 @@ const SinglePropertyCard = styled.div`
       }
       span{
         font-size: 16px;
-      }
+      } 
+  }@media (max-width: 768px) {
+    img {
+      width: 260px !important;
+      height: 210px !important;
+    }   
+  }@media (max-width: 640px) {
+    img {
+      width: 240px !important;
+      height: 190px !important;
+    }   
+    h3 {
+      font-size:15.7px
+    }
+  }@media (max-width: 568px) {
+    img {
+      width: 210px !important;
+      height: 160px !important;
+    }   
+  }@media (max-width: 478px) {
+    img {
+      width: 180px !important;
+      height: 130px !important;
+    }   
+  }@media (max-width: 400px) {
+    img {
+      width: 160px !important;
+      height: 110px !important;
+    }   
+  }@media (max-width: 360px) {
+    img {
+      width: 140px !important;
+      height: 100px !important;
+    }   
+  }@media (max-width: 320px) {
+    img {
+      width: 130px !important;
+      height: 100px !important;
+    }   
+  }@media (max-width: 300px) {
+    img {
+      width: 100px !important;
+      height: 80px !important;
+    }    
   }
   h3 {
     font-size: 18.7px;

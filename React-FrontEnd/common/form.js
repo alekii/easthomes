@@ -47,6 +47,9 @@ class Form extends Component {
     }
     this.setState({ query });
   };
+
+
+  
   changeOption = ({ currentTarget: select }) => {
     const query = { ...this.state.query };
     query[select.name] = select.value;

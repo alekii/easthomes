@@ -4,8 +4,11 @@ import styled from "styled-components"
 export const SliderContainer = styled.div`
 height:inherit;  
 max-width:1366px;
-margin:0 auto; 
-width:100%
+margin:0 auto;  
+width:100%;
+@media(max-width:540px){
+   display:none 
+} 
 `
 
 export const Img = styled.img` 

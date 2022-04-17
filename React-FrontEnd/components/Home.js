@@ -27,15 +27,21 @@ const Wrap = styled.div`
   flex-direction: column;
   justify-content: space-between; 
    
-`;
+`; 
 
-const PropertyForSaleHeading = styled.div`
-  margin-top: 100px;
+const PropertyForSaleHeading = styled.div`  
   h2 {
     font-size: 25px;
     font-family: "Roboto", sans-serif;
-    color: #1a1a1a;
-    text-align: center;
-    padding: 30px 0;
+    color: #1a1a1a; 
+    text-align: center; 
+    position:relative;
+    top:200px
+  }
+
+  @media(max-width:768px){
+    h2{
+    top:100px
+    } 
   }
 `;

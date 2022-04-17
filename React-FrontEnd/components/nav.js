@@ -8,9 +8,8 @@ class Nav extends Component {
     return (
       <NavBar>
         <MenuItems>
-          <Logo><Link to="/">EastHomes</Link> </Logo>
-          <LeftItems>
-              <li><Link to="/single">Single</Link></li>
+          <Logo><Link to="/">EastHomes</Link> </Logo> 
+          <LeftItems>  
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>
            </LeftItems>
