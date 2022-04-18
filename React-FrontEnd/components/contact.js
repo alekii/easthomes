@@ -1,18 +1,22 @@
 import React, { Component } from "react";
-import SearchBar from "./SearchBar";
 import "../css/styles.css";
-import styled from "styled-components";
+import styled from "styled-components";  
+import SearchBar from "./SearchBar"; 
+
 class Contact extends Component {
   state = {
     formData:{name:'',email:'',message:''}
-  };
+  }; 
+
   handleSubmit = () =>{ 
     
   }
   render() {
     return (
-      <Content>
-        <SearchBar />
+      <Content> 
+      <div className="SearchBarArea">
+      <SearchBar />
+      </div>
         <div className="content">
         <ContactDetails> 
           <h2>Contact Us</h2>
@@ -56,8 +60,7 @@ width: 80%;
 margin: 0 auto;
 
 `
-const Form = styled.div`
-  width: 40%;
+const Form = styled.div` 
   max-width: 500px;
   margin-top: 20px;
   label,
@@ -90,6 +93,11 @@ const Form = styled.div`
       color:white;
       font-weight:bold;
       font-size:15px;
-      border-radius:5px
+      border-radius:5px;
+      cursor:pointer
+  }
+
+  @media(max-width:768px){
+    width:100%
   }
 `;

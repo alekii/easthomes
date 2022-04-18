@@ -1,6 +1,6 @@
 import './App.css'; 
- import React, { Component } from 'react';
-import { BrowserRouter,Route } from 'react-router-dom';
+ import React from 'react';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components'
 import Home from './components/Home'; 
 import About from './components/about'; 
@@ -10,14 +10,33 @@ import Footer from "./components/footer";
 import Single from './components/singleProperty';
 import Contact from './components/contact'; 
 import SearchResults from './components/searchResults';
+import Sidebar from './components/sidebar'; 
+import MobileSearch from './common/searchform';
 
- class App extends Component { 
-    
- render(){
-    
+ const App =()=>{ 
+ const [sidebar, setSidebar] = React.useState(false);
+ const [searchform, setSearchForm] = React.useState(false)
+
+const toggleSidebar = () =>{  
+  setSidebar((prevState)=>!prevState);
+}
+
+const toggleSearchForm =()=>{ 
+  setSearchForm((prevState)=>!prevState);
+}
+
  return (
      <Content> 
-     <Nav></Nav>
+     <Nav openSidebar ={toggleSidebar}
+          openSearchForm ={toggleSearchForm}/>
+     <Sidebar sidebar={sidebar}
+              toggleSidebar={toggleSidebar}> 
+      </Sidebar>
+      <MobileSearch  
+           searchform={searchform} 
+      >
+
+      </MobileSearch>
        <Switch> 
          <Route exact  path="/" > 
          <Home/>  
@@ -37,10 +56,10 @@ import SearchResults from './components/searchResults';
          <SearchResults/>  
          </Route>
      </Switch> 
+
      <Footer></Footer>
      </Content>
   );
-}
 }
 
 export default App;
@@ -48,5 +67,6 @@ export default App;
 const Content = styled.div`
 display:flex;
 flex-direction:column;
-justify-content:space-between
+justify-content:space-between;
+min-height: 100vh; 
 `

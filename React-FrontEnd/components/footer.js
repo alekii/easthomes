@@ -22,7 +22,7 @@ function footer(){
        </NewsLetter>
        </FooterItems>
        <Copyright>
-         EastHomes Limited. Copyright 2022. A ll rights reserved
+         EastHomes Limited. &#169;2022. All rights reserved
        </Copyright>
    </Footer>
 
@@ -35,20 +35,23 @@ export default footer;
 const Footer = styled.div`
 background-color:#1ea69a;
 width:100%;
-margin-top:50px
+margin-top:50px;
+
 `
 
 const FooterItems =  styled.div`
- @media(min-width:1366px){
-     margin: 0  auto;
-    
- }
 width:100%;
 max-width:1366px;
 padding:20px 20px;  
 display:flex;
 justify-content:space-between;
+ @media(min-width:1366px){
+    margin: 0  auto; 
+}
+@media(max-width:768px){
+    display:none;
 
+}
 `
 
 const Contact = styled.ul`
@@ -99,9 +102,10 @@ const NewsLetter = styled.ul`
 `
 
 const Copyright = styled.p`
-   background-color:#f7f7f7;
+   background-color:#ebeff7;
    text-align:center;
    font-size:14px;
-   padding:10px
+   padding:10px;
+   border-top:1px solid #ccc
 
 `

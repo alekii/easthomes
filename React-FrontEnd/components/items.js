@@ -90,8 +90,6 @@ function getCard(j) {
     })
     )
   }
-  
-
 
   return (
     <>

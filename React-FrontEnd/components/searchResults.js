@@ -19,7 +19,7 @@ const SearchResults =() =>{
   
   async function fetchData(){
     const res = await searchProperty(searchterm)
-    setData(res)
+    setData(res.data)
     setIsDataReady(true)
     if(res.data.count!==0){
       setDataPresent(true)
@@ -38,8 +38,9 @@ const SearchResults =() =>{
    }
   return (
     
-    <Wrap><h2>Showing {data.data.count} results for {town} town </h2>
-    <PropertyCard data={data.data.results}></PropertyCard>  
+    <Wrap>
+    <h2>Showing {data.count} results for {town} town </h2>
+    <PropertyCard data={data.results}></PropertyCard>  
     </Wrap>
       
      )

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Input from "./input";
-import Select from "./select"; 
-import { searchProperty } from './../services/propertyService'; 
+import Select from "./select";  
 
 class Form extends Component {
   state = {

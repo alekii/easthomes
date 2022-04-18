@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 * 
 {
   font-family: "Rubik", sans-serif;
@@ -11,7 +13,6 @@
 
 body {
   width:100%;
-  margin:0 auto;
-  overflow-x:hidden;
+  margin:0 auto; 
   background-color:#F7F7F7
 }

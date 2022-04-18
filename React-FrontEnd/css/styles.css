@@ -4,11 +4,48 @@ flex-direction:column;
 width:17%;
 }
 
-.content {
+
+.content, .AboutContent {
     padding-top:175px 
 }
 
 .items{
     margin-top: 100px; 
- 
 }
+ 
+@media(max-width:500px){ 
+.SearchBarArea{ 
+  display: none;
+  }.content {
+    padding-top:75px 
+}
+}
+
+ 
+@media(max-width:768px){ 
+    .searchterms{ 
+        width: 18%;
+      }  
+    }
+    
+    
+/**************************************************
+ Mobile search form
+****************************************************/
+.propertysearchform{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    transform:translateY(-100%);
+    transition: transform 0.7s ease;
+}
+
+@media(min-width:500px){  
+      .propertysearchform{ 
+          display: none;
+    }
+    } 
+.searchformopen{ 
+    transform:translateY(0%);
+    } 

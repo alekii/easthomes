@@ -11,12 +11,12 @@ function Slider(props) {
   const [currentImageIndex, setCurrentImageIndex] = useState(2);
   const length = slides.length;
 
-   React.useEffect(() => {
+   React.useEffect(() => { 
     const interval = setInterval(() => {
       setCurrentImageIndex(
         currentImageIndex === length - 1 ? 0 : currentImageIndex + 1
       );
-    }, 15000);
+    }, 1500000);
     return () => clearInterval(interval);
   }, [currentImageIndex]);
  
@@ -34,21 +34,19 @@ function Slider(props) {
   };
 
   const showButtons = () => {
-      firstbutton.current.style.transform = "translateX(0)"
-      lastbutton.current.style.transform = "translateX(0)"
-      firstbutton.current.style.transition = "transform 0.7s ease"
-      lastbutton.current.style.transition = "transform 0.7s ease"
+      firstbutton.current.style.opacity = "1"
+      lastbutton.current.style.opacity= "1" 
+      firstbutton.current.style.transition = "opacity 0.7s ease"
+      lastbutton.current.style.transition = "opacity 0.7s ease"
 
   }
   const hideButtons = () => {
-    firstbutton.current.style.transform = "translateX(-100vw)"
-    lastbutton.current.style.transform = "translateX(100vw)"
-    firstbutton.current.style.transition = "transform 1s ease"
-    lastbutton.current.style.transition = "transform 1s ease"
+    firstbutton.current.style.opacity = "0"
+    lastbutton.current.style.opacity= "0" 
+    firstbutton.current.style.transition = "opacity 1.7s ease"
+    lastbutton.current.style.transition = "opacity 1.7s ease"
 
-}
-  const str = "/img/";
-
+} 
   return (
     <SliderContainer onMouseLeave={hideButtons} >
         <Holder>
@@ -58,8 +56,9 @@ function Slider(props) {
       {slides.map((slide, index) => {
         return (
           index === currentImageIndex && (
-            <ImageHolder key={slide} onMouseOver={showButtons}  style={{ backgroundImage: "url(/img/" + slide + ")" }}
+            <ImageHolder key={slide} onMouseOver={showButtons}   
              >
+               <img src={"/img/"+slide }/>
              </ImageHolder>
           )
         );
@@ -89,12 +88,12 @@ const Button = styled.button`
   z-index:1;
   margin: 0 10px;
 
-  &: first-child{
-      transform:translateX(-101vw)
-  }&: last-child{
-    transform:translateX(100vw)
+  &: first-child{  
+      opacity:0;
+  }&: last-child{  
+    opacity:0;
 }
-
+transition:opacity 0.6s;
 `
 
 const ImageHolder = styled.div`
@@ -111,6 +110,11 @@ animation: fadeIn 1.5s ease;
     0%{opacity:0.9;
     }
     100%{opacity:1; }
+}
+
+img{
+  width:inherit;
+  height:inherit;
 }
 `
 

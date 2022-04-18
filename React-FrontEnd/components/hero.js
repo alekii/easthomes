@@ -1,64 +1,24 @@
 import React, { Component, createRef } from "react";
 import styled from "styled-components";
 import Slider from "./Carousel/Slider";
-import "../css/hero.css";
-import Form from "../common/form";
-import { Redirect } from "react-router-dom";
-import SearchResults from "./searchResults";
+import "../css/hero.css"; 
+import PropertySearchForm from './propertysearchform'
 
-class Hero extends Form {
-  towns = ["Nairobi", "Kajiado", "Kiambu", "Machakos"];
-  bedrooms = [1, 2, 3, 4];
-  state = {
-    query: {
-      town: this.towns[0],
-      bedrooms: this.bedrooms[0],
-      minprice: "1000000",
-      maxprice: "10000000",
-    },
-    errors: {},
-    redirect:false
-  };
-
+class Hero extends Component{
+ 
   imagesData = [ 
     "exterior-00.jpg", 
     "exterior-01.jpg", 
     "exterior-05.jpg" 
   ];
-
-  redirect = () =>{  
-    let redirect = this.state.redirect
-    redirect=true; 
-    this.setState({redirect}) 
-  };
-  render() {
-      if(this.state.redirect){  
-        const {town, minprice,maxprice} = this.state.query 
-        let search = `/search/${town}/${minprice}/${maxprice}`  
-      return( 
-        <><Redirect to={{pathname:search}}/>
-        </>)
-    }
-    const { query, errors } = this.state;
+ 
+  render() { 
     return (
       <HeroSection>
         <Slider slides={this.imagesData} />
-        <PropertySearch> 
-          <h2>Property Search</h2> 
-          <form onSubmit={this.handleSubmit}>
-            {this.renderSelect("", "town", "Town", this.towns)}
-            {this.renderSelect("", "bedrooms", "Bedrooms", this.bedrooms)}  
-            <Price>
-              <MinPrice>
-                {this.renderInput("", "minprice", "Min Price")}
-              </MinPrice>
-              <MaxPrice>
-                {this.renderInput("", "maxprice", "Max Price")}
-              </MaxPrice>
-            </Price> 
-            <input type="submit" name="search" id="search" value="Search" /> 
-          </form>
-        </PropertySearch>
+        <PropertySearchForm> 
+          
+        </PropertySearchForm>
         <AmSoWavy style={{ backgroundImage: "url(/img/theone.svg)" }}>
           <AboutUs>
             <h3>About Us</h3>

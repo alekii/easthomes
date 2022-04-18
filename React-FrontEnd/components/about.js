@@ -7,8 +7,10 @@ class About extends Component {
   render() {
     return (
       <Content>
+        <div className="SearchBarArea">
         <SearchBar />
-        <div className="content">
+        </div>
+        <div className="AboutContent">
             <Text>
           <h2>About East Homes</h2>
           <p>
@@ -57,16 +59,28 @@ export default About;
 const Content = styled.div`
  
 `;
+
 const Text = styled.div`
 
   h2{
       width:80%;
       max-width:1366px;
-      margin:0 auto;
+      margin:0 auto 10px auto;
       font-size:20px;
+
   }
   p{
     width:50%;
     margin: 16px 0 0 10%;
+  }
+
+  @media(max-width:900px){
+    p{
+      width:80%;
+      margin:0 auto;
+    }
+  }
+  @media(max-width:768px){ 
+    margin-top: -90px;
   }
 `;
