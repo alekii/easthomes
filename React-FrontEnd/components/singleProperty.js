@@ -3,9 +3,10 @@ import SearchBar from "./SearchBar";
 import styled from "styled-components";   
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'; 
 import  {getProperty}  from '../services/propertyService';
+import CurrencyFormat from "react-currency-format"; 
 
 function Single() {   
-  const [response, setResponse] = React.useState([])
+  const [data, setData] = React.useState([])
   const [isLoaded, setIsLoaded] = React.useState(false)
   const {id} = useParams() 
 
@@ -14,7 +15,7 @@ React.useEffect(()=>{
 },[])  
 async function fetchData(){ 
   const res = await getProperty(id);  
-  setResponse(res)
+  setData(res.data)  
   setIsLoaded(true) 
 }
   if(!isLoaded){
@@ -24,63 +25,31 @@ async function fetchData(){
   } 
     return ( 
       <Content>
-        <SearchBar />
+        <div className="SearchBarArea">
+      <SearchBar />
+      </div>
         <div className="content"> 
-          <h2>Bungalow in South Nairobi</h2> 
-           <h3>Kshs 4,568,870</h3>
-          <ImgHolder>
-            <img src="/img/exterior-00.jpg" alt="" />
+          <h2>{data.name}</h2>  
+           <h3><CurrencyFormat value={data.price} 
+                               displayType="text" 
+                               thousandSeparator={true} 
+                               prefix={'Kshs '}/>
+           </h3> 
+           <h4>{data.location.location_name}</h4>
+           <ImgHolder>
+            <img src={data.images[0].image} alt="" />
           </ImgHolder>
           <ContentMain>
             <ContentLeft>
-                <h4>Property Details</h4>
-              <p>
-                Contrary to popular belief, Lorem Ipsum is not simply random
-                text. It has roots in a piece of classical Latin literature from
-                45 BC, making it over 2000 years old. Richard McClintock, a
-                Latin professor at Hampden-Sydney College in Virginia, looked up
-                one of the more obscure Latin words, consectetur, from a Lorem
-                Ipsum passage, and going through the cites of the word in
-                classical literature, discovered the undoubtable source. Lorem
-                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
-                Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
-                written in 45 BC. This book is a treatise on the theory of
-                ethics, very popular during the Renaissance. The first line of
-                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
-                in section 1.10.32. The standard chunk of Lorem Ipsum used since
-                the 1500s is reproduced below for those interested. Sections
-                1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by
-                Cicero are also reproduced in their exact original form,
-                accompanied by English versions from the 1914 translation by H.
-                Rackham.
-              </p>
-              <p>
-                Contrary to popular belief, Lorem Ipsum is not simply random
-                text. It has roots in a piece of classical Latin literature from
-                45 BC, making it over 2000 years old. Richard McClintock, a
-                Latin professor at Hampden-Sydney College in Virginia, looked up
-                one of the more obscure Latin words, consectetur, from a Lorem
-                Ipsum passage, and going through the cites of the word in
-                classical literature, discovered the undoubtable source. Lorem
-                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
-                Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
-                written in 45 BC. This book is a treatise on the theory of
-                ethics, very popular during the Renaissance. The first line of
-                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
-                in section 1.10.32. The standard chunk of Lorem Ipsum used since
-                the 1500s is reproduced below for those interested. Sections
-                1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by
-                Cicero are also reproduced in their exact original form,
-                accompanied by English versions from the 1914 translation by H.
-                Rackham.
-              </p>
+                <h4>Property Details</h4> 
+                 {data.description} 
             </ContentLeft>
             <ContentRight>
                 <AgentImgHolder>
-                <img src="/img/agent-00.jpg" alt=""/><p> </p> 
-                <p><strong>Agent Name:</strong> {`${response.data.agent.first_name}`}</p>
-                <p><strong>Phone:</strong> {response.data.agent.phone}</p>
-                <p><strong>Email:</strong> {response.data.agent.email}</p>
+                <img src={data.agent.agentimages[0].image} alt=""/><p> </p> 
+                <p><strong>Agent Name:</strong> {`${data.agent.first_name}`}</p>
+                <p><strong>Phone:</strong> {data.agent.phone}</p>
+                <p><strong>Email:</strong> {data.agent.email}</p>
                 </AgentImgHolder> 
             </ContentRight>
           </ContentMain>
@@ -93,7 +62,7 @@ async function fetchData(){
 export default Single;
 const Content = styled.div`
   width: 100%;
-  h2,h3{ 
+  h2,h3,h4{ 
       width:80%; 
       margin:0 auto;  
       line-height:34px; 

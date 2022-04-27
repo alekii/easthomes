@@ -8,13 +8,6 @@ class LocationSerializer(serializers.ModelSerializer):
         fields = ['location_name', 'longitude', 'latitude']
 
 
-class AgentSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Agent
-        fields = ['id', 'first_name', 'last_name', 'email', 'phone', 'agentimages']
-
-
 class PropertyImageSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         property_id = self.context['property_id']
@@ -22,27 +15,35 @@ class PropertyImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PropertyImage
-        fields = ['id', 'image']
+        fields = ['image']
 
 
 class AgentImageSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
-        property_id = self.context['agent_id']
-        return AgentImage.objects.create(agent_id=property_id, **validated_data)
+        agent_id = self.context['agent_id']
+        return AgentImage.objects.create(agent_id=agent_id, **validated_data)
 
     class Meta:
         model = AgentImage
-        fields = ['id', 'image']
+        fields = ['image']
+
+
+class AgentSerializer(serializers.ModelSerializer):
+    agentimages = AgentImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Agent
+        fields = ['id', 'first_name', 'last_name', 'email', 'phone', 'agentimages']
 
 
 class PropertySerializer(serializers.ModelSerializer):
     images = PropertyImageSerializer(many=True, read_only=True)
+    print(Property.PROPERTY_TYPES)
 
     class Meta:
         model = Property
-        fields = ['id', 'name', 'price', 'description', 'location', 'agent', 'images']
+        fields = ['id', 'name', 'price', 'description', 'location', 'agent', 'images', 'bedrooms', 'property_type']
 
     location = LocationSerializer()
     agent = AgentSerializer()
-
 

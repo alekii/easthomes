@@ -6,14 +6,14 @@ let i =0;
 const PropertyCard=({data})=> {   
    return (
     <PropertyRow>
-       { data.map((property,index)=>{
-         console.log()
+       { data.map((property,index)=>{ 
+         console.log(property)
            return(   <SinglePropertyCard key={index}> 
                   <Link to={`/single/${data[index].id}`}>
-                  <img src="/img/exterior-01.jpg" alt=""/>
+                  <img src={property.images[0].image} alt=""/>
                   </Link>  
-                  <h3>h3</h3>
-                  <h4>4 bedrooms</h4>
+                  <h3>{property.name}</h3>
+                  <h4>{property.bedrooms} bedrooms</h4>
                   <p>
                     <CurrencyFormat value={property.price} displayType="text" thousandSeparator={true} prefix={'Kshs '}/>
                   </p>

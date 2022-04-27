@@ -31,6 +31,7 @@ class Property(models.Model):
     price = models.IntegerField()
     agent = models.ForeignKey(Agent, on_delete=models.PROTECT, related_name="properties")
     property_type = models.CharField(max_length=1, choices=PROPERTY_TYPES, default=TYPE_BUNGALOW)
+    bedrooms = models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return self.name
@@ -58,7 +59,7 @@ class PropertyImage(models.Model):
 
 
 class AgentImage(models.Model):
-    Agent = models.ForeignKey(Agent, on_delete=models.CASCADE, related_name="agentimages")
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE, related_name="agentimages")
     image = models.ImageField(upload_to='core/agent/images')
 
     def __str__(self) -> str:

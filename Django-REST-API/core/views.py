@@ -1,4 +1,3 @@
-from django.db.models import Count, F
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import IsAdminUser
@@ -6,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import PropertyFilter
-from .models import Property as Prop, Agent, PropertyImage
+from .models import Property as Prop, Agent, PropertyImage, AgentImage
 from .serializers import PropertySerializer, AgentSerializer, PropertyImageSerializer, AgentImageSerializer
 from .permissions import IsAdminOrReadOnly
 
@@ -60,4 +59,4 @@ class AgentImageViewSet(ModelViewSet):
         return {'agent_id': self.kwargs['agent_pk']}
 
     def get_queryset(self):
-        return PropertyImage.objects.filter(agent_id=self.kwargs['agent_pk'])
+        return AgentImage.objects.filter(agent_id=self.kwargs['agent_pk'])
