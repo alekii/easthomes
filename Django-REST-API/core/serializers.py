@@ -38,7 +38,6 @@ class AgentSerializer(serializers.ModelSerializer):
 
 class PropertySerializer(serializers.ModelSerializer):
     images = PropertyImageSerializer(many=True, read_only=True)
-    print(Property.PROPERTY_TYPES)
 
     class Meta:
         model = Property
