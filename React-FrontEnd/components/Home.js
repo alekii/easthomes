@@ -12,7 +12,7 @@ class Home extends Component {
       <Wrap> 
         <Hero></Hero>
         <PropertyForSaleHeading >
-          <h2>Property for Sale</h2>
+          <h2 id ="scrollIntoView">Property for Sale</h2>
         </PropertyForSaleHeading>
         <Items></Items>
       </Wrap>
@@ -38,10 +38,21 @@ const PropertyForSaleHeading = styled.div`
     position:relative;
     top:200px
   }
-
-  @media(max-width:768px){
+ @media(max-width:768px){
     h2{
-    top:100px
-    } 
+    top:130px
+    }
   }
+  @media(max-width:500px){
+  h2{
+    font-size:22px
+  }
+  }
+  @media(max-width:360px){
+  h2{
+    font-size:18px
+  }
+  }
+
+
 `;

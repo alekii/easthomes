@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 import Input from "./input";
-import Select from "./select";  
+import Select from "./select";
 
 class Form extends Component {
+  towns = ["Nairobi", "Kajiado", "Kiambu", "Machakos"];
+  bedrooms = [1, 2, 3, 4];
+  renderform = true;
   state = {
-    query: {},
+    query: {
+      town: this.towns[0],
+      bedrooms: "4",
+      minprice: "1000000",
+      maxprice: "10000000",
+    },
     errors: {},
+    redirect: false,
   };
   validate = (number) => {
     if (number === "") return false;
@@ -24,14 +33,23 @@ class Form extends Component {
 
     return Object.keys(errors).length === 0 ? null : errors;
   };
-  handleSubmit = async(e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
+    if (this.props.toggleSearchForm) {
+      this.props.toggleSearchForm();
+    }
     const errors = this.validateForm();
     this.setState({ errors: errors || {} });
-    if (errors) return;  
-    this.redirect()  
+    if (errors) return;
+    this.redirect();
   };
 
+  redirect = () => {
+    let redirect = this.state.redirect;
+    redirect = true;
+    this.renderform = false;
+    this.setState({ redirect });
+  };
 
   handleChange = ({ currentTarget: input }) => {
     const query = { ...this.state.query };
@@ -47,8 +65,6 @@ class Form extends Component {
     this.setState({ query });
   };
 
-
-  
   changeOption = ({ currentTarget: select }) => {
     const query = { ...this.state.query };
     query[select.name] = select.value;
@@ -68,7 +84,7 @@ class Form extends Component {
       ></Input>
     );
   }
-  renderSelect(className, name, label, options) {
+  renderSelect(className, name, label, options, defaultValue) {
     return (
       <Select
         name={name}
@@ -76,6 +92,7 @@ class Form extends Component {
         onChange={this.changeOption}
         label={label}
         options={options}
+        defaultValue={defaultValue}
       ></Select>
     );
   }

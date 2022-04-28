@@ -33,7 +33,8 @@ const toggleSearchForm =()=>{
               toggleSidebar={toggleSidebar}> 
       </Sidebar>
       <MobileSearch  
-           searchform={searchform} 
+           searchform={searchform}
+              toggleSearchForm={toggleSearchForm}>
       >
 
       </MobileSearch>
@@ -52,7 +53,7 @@ const toggleSearchForm =()=>{
          <Route path="/contact" > 
          <Contact/>  
          </Route>
-         <Route path="/search/:town/:minprice/:maxprice" > 
+         <Route path="/search/:town/:minprice/:maxprice/:bedrooms" > 
          <SearchResults/>  
          </Route>
      </Switch> 

@@ -1,44 +1,37 @@
 import React, { Component } from "react";
-import styled from "styled-components"; 
-import "../css/styles.css"; 
-import Form from '../common/form';
+import styled from "styled-components";
+import "../css/styles.css";
+import Form from "../common/form";
 import { Redirect } from "react-router-dom";
 
+class SearchBar extends Form {
+  render() {
+    if (!this.renderform) {
+      this.renderform = true;
+      const { town, minprice, maxprice, bedrooms } = this.state.query;
+      let search = `/search/${town}/${minprice}/${maxprice}/${bedrooms}`;
 
-class SearchBar extends Form { 
-  towns = ["Nairobi", "Kajiado", "Kiambu", "Machakos"];
-bedrooms = [1, 2, 3, 4];
-state = {
- query: {
-   town: this.towns[0],
-   bedrooms: this.bedrooms[0],
-   minprice: "1000000",
-   maxprice: "10000000",
- },
- errors: {},
- redirect:false
-};
-redirect = () =>{  
-  let redirect = this.state.redirect
-  redirect=true; 
-  this.setState({redirect}) 
-};
-  render(){if(this.state.redirect){  
-    const {town, minprice,maxprice} = this.state.query 
-    let search = `/search/${town}/${minprice}/${maxprice}`  
-  return( 
-    <><Redirect to={{pathname:search}}/>
-    </>)
-}
-    const { query, errors } = this.state;
+      return (
+        <>
+          <Redirect to={{ pathname: search }} />
+        </>
+      );
+    }
+    const { town, bedrooms } = this.state.query;
     return (
       <Bar>
-        <form onSubmit={this.handleSubmit}> 
+        <form onSubmit={this.handleSubmit}>
           <PropertySearch>
-           {this.renderSelect('searchterms','town','Town',this.towns)}
-           {this.renderSelect('searchterms','bedrooms','Bed Rooms',this.bedrooms)}
-           {this.renderInput('searchterms','minprice','Min Price')}
-           {this.renderInput('searchterms','maxprice','Max Price')}
+            {this.renderSelect("searchterms", "town", "Town", this.towns, town)}
+            {this.renderSelect(
+              "searchterms",
+              "bedrooms",
+              "Bed Rooms",
+              this.bedrooms,
+              bedrooms
+            )}
+            {this.renderInput("searchterms", "minprice", "Min Price")}
+            {this.renderInput("searchterms", "maxprice", "Max Price")}
             <div className="searchterms">
               <input type="submit" name="search" id="search" value="Search" />
             </div>
@@ -62,7 +55,7 @@ const PropertySearch = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-around;
-  background-color: #f7f7f7;
+  background-color: #f1ffff;
   border: 2px solid #bce0fd;
 
   label {

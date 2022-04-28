@@ -1,51 +1,69 @@
-.searchterms { 
-display:flex;
-flex-direction:column;
-width:17%;
+.searchterms {
+  display: flex;
+  flex-direction: column;
+  width: 17%;
 }
 
-
-.content, .AboutContent {
-    padding-top:175px 
+.content,
+.AboutContent {
+  padding-top: 175px;
 }
 
-.items{
-    margin-top: 100px; 
-}
- 
-@media(max-width:500px){ 
-.SearchBarArea{ 
-  display: none;
-  }.content {
-    padding-top:75px 
-}
+.items {
+  margin-top: 100px;
 }
 
- 
-@media(max-width:768px){ 
-    .searchterms{ 
-        width: 18%;
-      }  
-    }
-    
-    
+.items > div:last-child {
+  padding-bottom: 20px;
+}
+
+@media (max-width: 500px) {
+  .items {
+    margin-top: 130px;
+  }
+}
+
+@media (max-width: 500px) {
+  .SearchBarArea {
+    display: none;
+  }
+
+  .content {
+    padding-top: 75px;
+  }
+}
+
+@media (max-width: 768px) {
+  .searchterms {
+    width: 18%;
+  }
+}
+
+.noresultsfound {
+  margin-top: 40vh;
+  padding-bottom: 80vh;
+  text-align: center;
+}
+
 /**************************************************
  Mobile search form
 ****************************************************/
-.propertysearchform{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    transform:translateY(-100%);
-    transition: transform 0.7s ease;
+.propertysearchform {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(-100%);
+  transition: transform 0.7s ease;
+  z-index: 8;
 }
 
-@media(min-width:500px){  
-      .propertysearchform{ 
-          display: none;
-    }
-    } 
-.searchformopen{ 
-    transform:translateY(0%);
-    } 
+@media (min-width: 500px) {
+  .propertysearchform {
+    display: none;
+  }
+}
+
+.searchformopen {
+  transform: translateY(0%);
+}

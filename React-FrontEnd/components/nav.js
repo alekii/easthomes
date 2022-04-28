@@ -1,67 +1,76 @@
-import React from "react"; 
-import styled from "styled-components"; 
+import React from "react";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
-import 'remixicon/fonts/remixicon.css';
+import "remixicon/fonts/remixicon.css";
 
-const Nav=(props)=>{ 
-  const {openSidebar,openSearchForm} = props
-  
-    return (
-      <NavBar>
-        <MenuItems>
-          <Logo><Link to="/">EastHomes</Link> </Logo> 
-          <LeftItems>  
-              <DesktopMenu>
-                <ListItems>
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              </ListItems>
-              </DesktopMenu>
-              <MobileMenu>
-                <ListItems>
-              <li onClick={openSearchForm}><i className="ri-search-line"></i></li>
-              <li onClick={openSidebar}><i className="ri-menu-3-line"></i></li>
-              </ListItems>
-              </MobileMenu>
-           </LeftItems>
-        </MenuItems>
-      </NavBar>
-    );
-  }
+const Nav = (props) => {
+  const { openSidebar, openSearchForm } = props;
 
+  return (
+    <NavBar>
+      <MenuItems>
+        <Logo>
+          <Link to="/">EastHomes</Link>{" "}
+        </Logo>
+        <LeftItems>
+          <DesktopMenu>
+            <ListItems>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+              <li>
+                <Link to="/contact">Contact</Link>
+              </li>
+            </ListItems>
+          </DesktopMenu>
+          <MobileMenu>
+            <ListItems>
+              <li onClick={openSearchForm}>
+                <i className="ri-search-line"></i>
+              </li>
+              <li onClick={openSidebar}>
+                <i className="ri-menu-3-line"></i>
+              </li>
+            </ListItems>
+          </MobileMenu>
+        </LeftItems>
+      </MenuItems>
+    </NavBar>
+  );
+};
 
 export default Nav;
 
 const NavBar = styled.div`
   width: 100%;
   height: 50px;
-  background-color: #1ea69a;
-  position:fixed;
-  z-index:9
+  background-color: #454040;
+  position: fixed;
+  z-index: 9;
 `;
 
 const MenuItems = styled.div`
   max-width: 1366px;
   margin: 0 auto;
-  display:flex;justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
 
-  a { 
-    text-decoration:none;
-    color:white;
+  a {
+    text-decoration: none;
+    color: white;
   }
-  
 `;
 
 const Logo = styled.h1`
   padding: 10px 10px;
   color: white;
-  cursor: poiner;
-  font-size: 22px;
+  cursor: pointer;
+  font-size: 20px;
   font-weight: bold;
-  width:20px !important
+  width: 20px !important;
 `;
 
-const LeftItems = styled.div``
+const LeftItems = styled.div``;
 
 const ListItems = styled.ul`
 display:flex; 
@@ -77,41 +86,37 @@ display:flex;
   
   i{
     color: white; 
-    font-size: 30px; 
+    font-size: 27px;
 }
   }@media(max-width:360px){
     li{
-      padding: 0 5px;
+      padding: 0 14px;
     }
   }
     
-`
+`;
 
 const DesktopMenu = styled.div`
-
-@media(max-width:768px){
-  li{
-    display:none
-  }  
-}
-`
+  @media (max-width: 768px) {
+    li {
+      display: none;
+    }
+  }
+`;
 
 const MobileMenu = styled.div`
-li{
-  margin-top:10px;
-}
-@media(min-width:768px){  
-  li{
-    display:none;
+  li {
+    margin-top: 10px;
   }
-  
-}
-
-@media(min-width:500px){
-  li:first-child{
-    display:none
+  @media (min-width: 768px) {
+    li {
+      display: none;
+    }
   }
-}
 
-
-`
+  @media (min-width: 501px) {
+    li:first-child {
+      display: none;
+    }
+  }
+`;

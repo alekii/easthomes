@@ -1,15 +1,20 @@
-import React from 'react'
-import '../css/styles.css';
-import PropertySearchForm from '../components/propertysearchform';
+import React from "react";
+import "../css/styles.css";
+import PropertySearchForm from "../components/propertysearchform";
 
-function MobileSearch({searchform}) { 
+const MobileSearch = (props) => {
+  const { searchform, toggleSearchForm } = props;
   return (
-    <div className={searchform?"propertysearchform searchformopen":"propertysearchform"}>
-        <PropertySearchForm>
-            
-        </PropertySearchForm>
+    <div
+      className={
+        searchform ? "propertysearchform searchformopen" : "propertysearchform"
+      }
+    >
+      <PropertySearchForm
+        toggleSearchForm={toggleSearchForm}
+      ></PropertySearchForm>
     </div>
-  )
-}
+  );
+};
 
-export default MobileSearch
+export default MobileSearch;

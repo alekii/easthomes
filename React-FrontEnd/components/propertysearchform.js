@@ -1,95 +1,86 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 import Form from "../common/form";
-import { Redirect } from "react-router-dom"; 
+import { Redirect } from "react-router-dom";
 
 class PropertySearchForm extends Form {
+  render() {
+    if (!this.renderform) {
+      this.renderform = true;
+      const { town, bedrooms, minprice, maxprice } = this.state.query;
+      let search = `/search/${town}/${minprice}/${maxprice}/${bedrooms}`;
+      return (
+        <>
+          <Redirect to={{ pathname: search }} />
+        </>
+      );
+    }
 
-towns = ["Nairobi", "Kajiado", "Kiambu", "Machakos"];
-bedrooms = [1, 2, 3, 4];
-state = {
- query: {
-   town: this.towns[0],
-   bedrooms: this.bedrooms[0],
-   minprice: "1000000",
-   maxprice: "10000000",
- },
- errors: {},
- redirect:false
-};
-redirect = () =>{  
-  let redirect = this.state.redirect
-  redirect=true; 
-  this.setState({redirect}) 
-};
-  render(){if(this.state.redirect){  
-    const {town, minprice,maxprice} = this.state.query 
-    let search = `/search/${town}/${minprice}/${maxprice}`  
-  return( 
-    <><Redirect to={{pathname:search}}/>
-    </>)
-}
-const { query, errors } = this.state;
-  return ( 
+    const { town, bedrooms } = this.state.query;
+    return (
       <PropertySearch>
-        <h2>Property Search</h2> 
-          <form onSubmit={this.handleSubmit}>
-            {this.renderSelect("", "town", "Town", this.towns)}
-            {this.renderSelect("", "bedrooms", "Bedrooms", this.bedrooms)}  
-            <Price>
-              <MinPrice>
-                {this.renderInput("", "minprice", "Min Price")}
-              </MinPrice>
-              <MaxPrice>
-                {this.renderInput("", "maxprice", "Max Price")}
-              </MaxPrice>
-            </Price> 
-            <input type="submit" name="search" id="search" value="Search" /> 
-          </form> 
+        <h2>Property Search</h2>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderSelect("", "town", "Town", this.towns, town)}
+          {this.renderSelect(
+            "",
+            "bedrooms",
+            "Bedrooms",
+            this.bedrooms,
+            bedrooms
+          )}
+          <Price>
+            <MinPrice>{this.renderInput("", "minprice", "Min Price")}</MinPrice>
+            <MaxPrice>{this.renderInput("", "maxprice", "Max Price")}</MaxPrice>
+          </Price>
+          <input type="submit" name="search" id="search" value="Search" />
+        </form>
       </PropertySearch>
-  )
-}
+    );
+  }
 }
 
 export default PropertySearchForm;
 const PropertySearch = styled.div`
-  background-color: #f7f7f7;
+  background-color: #f1ffff;
   z-index: 5;
-  height: 395px;
   width: 362px;
   position: absolute;
   left: 65%;
   top: 248px;
   border: 2px solid #bce0fd;
- 
-  @media(max-width:1220px){
-     left:55%
-  }
-  @media(max-width:980px){
-    left:45%;
 
- }
- 
-@media(max-width:768px){
-  left:27%;
-  top:117px 
-}
-@media(max-width:600px){
-  left:17%; 
-}
-@media(max-width:540px){
-   position:relative;
-   width:100%;
-   top:50px;
-   left:0 ;
-}
- 
+  @media (max-width: 1220px) {
+    left: 55%;
+  }
+  @media (max-width: 980px) {
+    left: 45%;
+  }
+
+  @media (max-width: 768px) {
+    left: 27%;
+    top: 117px;
+  }
+  @media (max-width: 600px) {
+    left: 17%;
+  }
+  @media (max-width: 540px) {
+    position: relative;
+    width: 100%;
+    top: 50px;
+    left: 0;
+    border: 1px solid #bce0fd;
+  }
+
   h2 {
     font-family: "Arial", serif;
     font-size: 19px;
     font-weight: bold;
     text-align: center;
     padding: 10px 0;
+    margin-top: 14px;
+    color: #1a1a1a;
+    opacity: 0.85;
   }
 
   form {
@@ -131,7 +122,7 @@ const PropertySearch = styled.div`
   select:focus,
   input:focus {
     outline: none;
-  } 
+  }
 `;
 
 const Price = styled.div`
